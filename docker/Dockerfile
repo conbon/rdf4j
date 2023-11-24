@@ -16,7 +16,7 @@ MAINTAINER Bart Hanssens (bart.hanssens@bosa.fgov.be)
 
 RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get clean
 
-ENV JAVA_OPTS="-Xmx2g"
+ENV JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5555 -Xmx2g"
 ENV CATALINA_OPTS="-Dorg.eclipse.rdf4j.appdata.basedir=/var/rdf4j"
 
 RUN adduser --system tomcat
@@ -35,4 +35,5 @@ USER tomcat
 WORKDIR /usr/local/tomcat/
 
 EXPOSE 8080
+EXPOSE 5555
 
